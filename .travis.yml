@@ -1,0 +1,27 @@
+language: python
+# services:
+  # - go
+  # - singularity
+python:
+  # - "2.7"
+  - "3.2"
+  - "3.3"
+  - "3.4"
+  - "3.5"
+  - "3.6"
+  - "3.7"
+  - "3.8"
+
+cache:
+  directories: []
+    # - $HOME/.pip
+    # - $HOME/virtualenv ### too big
+before_install: []
+  # - gimme 1.13.5
+  # - eval "$(gimme 1.13.5)"
+install:
+  - pip install . 
+  # - echo pass
+script:
+  - python test.py --all
+
