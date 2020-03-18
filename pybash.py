@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 __doc__ ='''
+Version: pybash-0.0.1
 Purpose:
 	- Mimicing `bash --verbose` on a line-by-line basis. Useful for
 	illustrating a bash session. 
