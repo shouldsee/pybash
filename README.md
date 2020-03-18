@@ -11,6 +11,9 @@
 `pip3 install pybash@https://github.com/shouldsee/pybash/tarball/master --user --upgrade`
 
 
+## Problems:
+    - does not work with `tee`
+
 ## Usage:
 
 ```

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 __doc__ ='''
-Version: pybash-0.0.1
+Version: pybash-0.0.2
 Purpose:
 	- Mimicing `bash --verbose` on a line-by-line basis. Useful for
 	illustrating a bash session. 
@@ -10,7 +10,8 @@ Purpose:
 Options:
 	--help     print this help
 	--stderr   print stderr to stdout
-	-c 
+	-c <cmd> 
+	-o <file>  record stdout to <file>
 
 Example:
 	pybash -c "echo some_cmd; echo some_other_cmd"
@@ -79,12 +80,25 @@ def _help(exit):
 	sys.exit(exit)
 
 def _main(args, fd, writer):
-
+	closes = []
 	if writer is None:
 		def writer(s):
 			sys.stdout.write(s)
+
 	if args is None:
 		args = sys.argv
+
+	if '-o' in args: 
+		i = args.index('-o')
+		fo = open(args[i+1],'w')
+		del args[i:i+2]
+		old_writer = writer
+		def writer(s):
+			old_writer(s)
+			fo.write(s)
+		closes.append(fo.close)
+
+
 
 	if '--help' in args:
 		_help(0)
@@ -111,6 +125,7 @@ def _main(args, fd, writer):
 			fd = sys.stdin.readline
 	bash_args = args[1:]
 	_main_proc(fd, writer, writing, bash_args)
+	[x() for x in closes]
 
 def _main_proc(fd, writer, writing, bash_args):
 	it = parser(fd)
