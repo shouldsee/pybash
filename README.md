@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/shouldsee/pybash.svg?branch=master)](https://travis-ci.com/shouldsee/pybash)
+
 # pybash: A hacky Python3 wrapper for bash.
 
 ## Requirement: 
