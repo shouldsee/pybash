@@ -9,7 +9,7 @@ except Exception as e:
 		'\nsee https://stackoverflow.com/questions/14426491/python-3-importerror-no-module-named-setuptools')
 	raise e
 import sys
-assert sys.version_info >= (3,5),('Requires python>=3.5, found python==%s'%('.'.join([str(x) for x in sys.version_info[:3]])))
+assert sys.version_info >= (3,0),('Requires python>=3.0, found python==%s'%('.'.join([str(x) for x in sys.version_info[:3]])))
 
 config = dict(
 	name='pybash',
