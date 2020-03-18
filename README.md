@@ -1,4 +1,4 @@
-# pybash: The Python wrapper for bash.
+# pybash: A hacky Python3 wrapper for bash.
 
 ## Requirement: 
 	- echo  
