@@ -13,7 +13,7 @@ assert sys.version_info >= (3,4),('Requires python>=3.4, found python==%s'%('.'.
 
 config = dict(
 	name='pybash',
-	version = '0.0.2', ### change in __init__.py in sync
+	version = '0.0.3', ### change in __init__.py in sync
 	# package_dir={"": "."},
     packages=['.'],
 	include_package_data=True,

@@ -1,2 +1,14 @@
+# 0.0.3
+- using Unbuffered() stdout and stderr
+- reformatting comments
+- added options
+	--help	      print this help
+	--stderr      print stderr to stdout
+	-c <cmd> 
+	--add_ts      add timestamp to headers
+	--add_dt      add elapsed time to stderr header
+	--single-line do not split command by whitespace
+
+
 # 0.0.2
 - added -o option
