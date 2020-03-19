@@ -18,7 +18,7 @@ Options:
 
 Example:
 	{% for line in _shell('python3 ./pybash.py <example.sh  --single-line --add-dt  | tee example.sh.log ',shell=True).splitlines() %}
-	{{line.rstrip()}}{%endfor%}
+	{{[line.rstrip(),print(line)][0]}}{%endfor%}
 }
 '''
 version = __doc__.lstrip().split('\n',1)[0].split('-')[-1].strip()
@@ -72,7 +72,7 @@ def parser(_readline, debug=0):
 		line = _readline()
 		# line = it.readline()
 		# .decode()
-		print('1'	,repr(line)) if debug else None
+		print('[1]'	,repr(line)) if debug else None
 		if line == '':
 			if len(buf):
 				raise ParsingError('Unexpected EOF: %r'%buf)
@@ -159,6 +159,7 @@ def _main(args, fd, writer):
 		cmd = args[i+1].strip('"\'')+'\n' ##### [fragile] potentially allowing broken command?
 		fd = iter([cmd,'']).__next__
 		del args[i:i+2]
+		# print()
 
 
 	if fd is None:
@@ -172,7 +173,7 @@ def _main(args, fd, writer):
 			fd = sys.stdin.readline
 	bash_args = args[1:]
 	writer('### [pybash-%s]\n'%version)
-	writer('### [sys.argv] %s'%(' '.join(sys.argv)))
+	writer('### [sys.argv] %s\n'%(' '.join(sys.argv)))
 	retcode = _main_proc(fd, writer, writing, bash_args,extra_args)
 	[x() for x in closes]
 	return retcode
@@ -187,9 +188,9 @@ def _main_proc(fd, writer, writing, bash_args, extra_args):
 		# if k in writing:
 		if k == 'command':
 			_writer('\n')
-			_writer(  '### %s\n'%('-'*15)) 
+			_writer('### %s\n'%('-'*15)) 
 		else:
-			_writer('\n### \n')
+			_writer('### \n')
 		# kb = ('[%8s]'%k)
 		_writer('### [%8s]'%(k,))
 		if timestamp:
@@ -199,13 +200,10 @@ def _main_proc(fd, writer, writing, bash_args, extra_args):
 				curr = time.time()
 				_writer('\n### [elapsed:%.3f s]'%(curr-last[0]))
 				last[0]=curr
-		# else:
-		# 	writer('###-- %s'%(kb,))
 		_writer('\n')
 	# else:
 	# 		None
 		# return '%s[%s][%.2f]'%(date_formatIso(),time.time())
-
 		# [%s][%.2f]
 	it = parser(fd)
 	cmd =  ['bash']+ bash_args
@@ -218,11 +216,12 @@ def _main_proc(fd, writer, writing, bash_args, extra_args):
 		write_header(_writer, k,timestamp,add_dt,writing)
 		# writer(  '###-- %s\n'%k) if k in writing else None
 		if k in writing:	
+			# writer('[line]%s'%repr(line))
 			if single_line:
 				### [fragile] keep indentation?
-				writer(line.lstrip())
+				writer(line.lstrip().rstrip() +'\n')
 			else:
-				writer('\\\n  '.join(line.split()))
+				writer('\\\n  '.join(line.strip().split())+'\n')
 		# writer(  line) if k in writing else None
 		# continue 
 		sig = ".pybash_done"

@@ -40,10 +40,10 @@ Example:
 	
 	### [pybash-0.0.4]
 	### [sys.argv] ./pybash.py --single-line --add-dt
+	
 	### ---------------
 	### [ command]
 	{ echo echo some_cmd; echo echo some_other_cmd; } | tee some_script.sh
-	
 	###
 	### [  stdout]
 	### echo some_cmd
@@ -53,7 +53,6 @@ Example:
 	### ---------------
 	### [ command]
 	pybash < some_script.sh > some_script.sh.log
-	
 	###
 	### [  stdout]
 	### ---------------
@@ -61,7 +60,6 @@ Example:
 	### ---------------
 	### [ command]
 	pybash -c "echo some_cmd; echo some_other_cmd" --single-line
-	
 	###
 	### [  stdout]
 	### ### [pybash-0.0.4]
@@ -80,7 +78,6 @@ Example:
 	### ---------------
 	### [ command]
 	pybash -c "echo some_cmd; echo some_other_cmd"
-	
 	###
 	### [  stdout]
 	### ### [pybash-0.0.4]
