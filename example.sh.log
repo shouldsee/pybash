@@ -1,4 +1,4 @@
-### [pybash-0.0.3]
+### [pybash-0.0.4]
 ### [sys.argv] ./pybash.py --single-line --add-dt
 ### ---------------
 ### [ command]
@@ -21,7 +21,7 @@ pybash < some_script.sh > some_script.sh.log
 pybash -c "echo some_cmd; echo some_other_cmd" --single-line
 ### 
 ### [  stdout]
-### ### [pybash-0.0.2]
+### ### [pybash-0.0.3]
 ### ### [sys.argv] /home/user/.local/bin/pybash -c echo some_cmd; echo some_other_cmd --single-line
 ### ### ---------------
 ### ### [ command]
@@ -38,7 +38,7 @@ pybash -c "echo some_cmd; echo some_other_cmd" --single-line
 pybash -c "echo some_cmd; echo some_other_cmd"
 ### 
 ### [  stdout]
-### ### [pybash-0.0.2]
+### ### [pybash-0.0.3]
 ### ### [sys.argv] /home/user/.local/bin/pybash -c echo some_cmd; echo some_other_cmd
 ### ### ---------------
 ### ### [ command]

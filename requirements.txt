@@ -2,3 +2,4 @@ path.py
 six
 unittest2
 tzlocal
+jinja2

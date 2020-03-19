@@ -17,60 +17,8 @@ Options:
 	--single-line do not split command by whitespace
 
 Example:
-	
-	### [pybash-0.0.4]
-	### [sys.argv] ./pybash.py --single-line --add-dt
-	### ---------------
-	### [ command]
-	{ echo echo some_cmd; echo echo some_other_cmd; } | tee some_script.sh
-	###
-	### [  stdout]
-	### echo some_cmd
-	### echo some_other_cmd
-	### ---------------
-	
-	### ---------------
-	### [ command]
-	pybash < some_script.sh > some_script.sh.log
-	###
-	### [  stdout]
-	### ---------------
-	
-	### ---------------
-	### [ command]
-	pybash -c "echo some_cmd; echo some_other_cmd" --single-line
-	###
-	### [  stdout]
-	### ### [pybash-0.0.3]
-	### ### [sys.argv] /home/user/.local/bin/pybash -c echo some_cmd; echo some_other_cmd --single-line
-	### ### ---------------
-	### ### [ command]
-	### echo some_cmd; echo some_other_cmd
-	### ###
-	### ### [  stdout]
-	### ### some_cmd
-	### ### some_other_cmd
-	### ### ---------------
-	### ---------------
-	
-	### ---------------
-	### [ command]
-	pybash -c "echo some_cmd; echo some_other_cmd"
-	###
-	### [  stdout]
-	### ### [pybash-0.0.3]
-	### ### [sys.argv] /home/user/.local/bin/pybash -c echo some_cmd; echo some_other_cmd
-	### ### ---------------
-	### ### [ command]
-	### echo\
-	###   some_cmd;\
-	###   echo\
-	###   some_other_cmd###
-	### ### [  stdout]
-	### ### some_cmd
-	### ### some_other_cmd
-	### ### ---------------
-	### ---------------
+	{% for line in _shell('python3 ./pybash.py <example.sh  --single-line --add-dt  | tee example.sh.log ',shell=True).splitlines() %}
+	{{line.rstrip()}}{%endfor%}
 }
 '''
 version = __doc__.lstrip().split('\n',1)[0].split('-')[-1].strip()

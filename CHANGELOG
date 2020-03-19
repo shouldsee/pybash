@@ -1,3 +1,7 @@
+# 0.0.4
+- use jinja2 for '--build'
+- use "src.py" and "src.md" to provide placeholder for docstring
+
 # 0.0.3
 - using Unbuffered() stdout and stderr
 - reformatting comments
