@@ -9,8 +9,8 @@ import importlib
 from pybash import _main,version
 class Case(unittest2.TestCase):
 	def test_c(self):
-		buf = []
-		_main(['pybash.src.py','-c','"echo aaa;echo bbb"'], None, writer=buf.append)
+		buf = []	
+		_main(['pybash.src.py','-c','"echo aaa;echo bbb"','--log-stdout',], None, writer=buf.append)
 		buf = ''.join(buf).splitlines()[2:]
 		exp= \
 ['### [pybash-%s]'%version,
@@ -32,8 +32,8 @@ class Case(unittest2.TestCase):
 		pprint(buf)
 	def test_pipe(self):
 		# buf = []
-		buf = subprocess.check_output(' '.join(['echo "echo aaa;echo bbb"|',sys.executable,'pybash.src.py']),shell=1)
-		buf = buf.decode().splitlines()
+		buf = subprocess.check_output(' '.join(['echo "echo aaa;echo bbb"|',sys.executable,'pybash.src.py','--log-stdout']),shell=1)
+		buf = buf.decode().splitlines()[2:]
 		exp = \
 [
  '### [pybash-%s]'%version,
@@ -48,7 +48,7 @@ class Case(unittest2.TestCase):
  '### [  stdout]',
  '### aaa',
  '### bbb',
- '### ---------------']
+ '### ---------------'][2:]
 		assert buf == exp,(pprint(buf),pprint(exp),print(repr(version)))
 
 import pdb

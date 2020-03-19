@@ -1,3 +1,14 @@
+# 0.0.5
+- original verbose mode triggered with `--log-stdout`
+- explicily deal with 
+  - `{{expr1}} = $expr2`    (python <- bash)
+  - `{{expr1}} = {{expr2}}` (python <- python)
+  - `expr1     = $expr2`    (bash   <- bash)
+  - `expr1     = {{expr2}}` (bash   <- python)
+  - {{import sys;}}         (pure python)
+  - echo $PWD               (pure bash)
+  - echo "{{sys}}"          (bash with python expansion)
+
 # 0.0.4
 - use jinja2 for '--build'
 - use "src.py" and "src.md" to provide placeholder for docstring
