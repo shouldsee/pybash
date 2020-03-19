@@ -40,35 +40,32 @@ Example:
 	
 	example.sh
 		
-		# alias pybash=./pybash.py
-		# alias pybash=./pybash.src.py
-		
 		echo "### verbose mode, pure bash"
 		{ echo echo some_cmd; echo echo some_other_cmd; } | tee some_script.sh
 		pybash < some_script.sh > some_script.sh.log --log-stdout
 		pybash -c "echo some_cmd; echo some_other_cmd" --single-line --log-stdout
 		
-		
 		echo "### mixing python and bash"
+		### assign: python <- bash
+		{{some_python_string}} =  ls -1 | head -n3
+		### assign: python <- python
+		{{some_python_list}}   = {{some_python_string.splitlines()}}
+		### assign: bash   <- python
+		some_shell_file        = {{ some_python_list[2]}}
+		### assign: bash   <- bash
+		some_other_path        = $( realpath $some_shell_file )
+		
 		### python wihtout assignment
 		{{import os; import sys;}}
 		### bash   without assignment
 		echo "{{sys.version_info}}"
 		
-		### python <- bash
-		{{some_python_string}} =  ls -1 | head -n3
-		### python <- python
-		{{some_python_list}}   = {{some_python_string.splitlines()}}
-		### bash   <- python
-		some_shell_file        = {{ some_python_list[2]}}
-		### bash   <- bash
-		some_other_path        = $( realpath $some_shell_file )
-		
-		
-		url     = "http://example.com"
-		curl --head $url
 		{{url}} = echo "http://example.com"
 		curl --head {{url}}
+		
+		### [ToDo]
+		### - control flow: if statement
+		### - control flow: for loop
 		
 		echo "[done]"
 		
@@ -131,18 +128,6 @@ Example:
 		
 		### ---------------
 		### [ command]
-		{{import os; import sys;}}
-		
-		### ---------------
-		### [ command]
-		echo "{{sys.version_info}}"
-		###
-		### [  stdout]
-		### sys.version_info(major=3, minor=5, micro=2, releaselevel='final', serial=0)
-		### ---------------
-		
-		### ---------------
-		### [ command]
 		{{some_python_string}} =  ls -1 | head -n3
 		
 		### ---------------
@@ -165,29 +150,14 @@ Example:
 		
 		### ---------------
 		### [ command]
-		url     = "http://example.com"
-		###
-		### [  stdout]
-		### ---------------
+		{{import os; import sys;}}
 		
 		### ---------------
 		### [ command]
-		curl --head $url
+		echo "{{sys.version_info}}"
 		###
 		### [  stdout]
-		### HTTP/1.1 200 OK
-		### Accept-Ranges: bytes
-		### Age: 509804
-		### Cache-Control: max-age=604800
-		### Content-Type: text/html; charset=UTF-8
-		### Date: Thu, 19 Mar 2020 14:37:52 GMT
-		### Etag: "3147526947+ident"
-		### Expires: Thu, 26 Mar 2020 14:37:52 GMT
-		### Last-Modified: Thu, 17 Oct 2019 07:18:26 GMT
-		### Server: ECS (sjc/4E74)
-		### X-Cache: HIT
-		### Content-Length: 1256
-		###
+		### sys.version_info(major=3, minor=5, micro=2, releaselevel='final', serial=0)
 		### ---------------
 		
 		### ---------------
@@ -200,17 +170,18 @@ Example:
 		###
 		### [  stdout]
 		### HTTP/1.1 200 OK
+		### Content-Encoding: gzip
 		### Accept-Ranges: bytes
-		### Age: 3109
+		### Age: 603694
 		### Cache-Control: max-age=604800
 		### Content-Type: text/html; charset=UTF-8
-		### Date: Thu, 19 Mar 2020 14:37:52 GMT
-		### Etag: "3147526947+ident"
-		### Expires: Thu, 26 Mar 2020 14:37:52 GMT
+		### Date: Thu, 19 Mar 2020 14:49:09 GMT
+		### Etag: "3147526947"
+		### Expires: Thu, 26 Mar 2020 14:49:09 GMT
 		### Last-Modified: Thu, 17 Oct 2019 07:18:26 GMT
-		### Server: ECS (sjc/4E5D)
+		### Server: ECS (sjc/4E71)
 		### X-Cache: HIT
-		### Content-Length: 1256
+		### Content-Length: 648
 		###
 		### ---------------
 		
