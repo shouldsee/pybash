@@ -23,6 +23,7 @@ Example:
 	### ---------------
 	### [ command]
 	{ echo echo some_cmd; echo echo some_other_cmd; } | tee some_script.sh
+	
 	###
 	### [  stdout]
 	### echo some_cmd
@@ -32,6 +33,7 @@ Example:
 	### ---------------
 	### [ command]
 	pybash < some_script.sh > some_script.sh.log
+	
 	###
 	### [  stdout]
 	### ---------------
@@ -39,13 +41,15 @@ Example:
 	### ---------------
 	### [ command]
 	pybash -c "echo some_cmd; echo some_other_cmd" --single-line
+	
 	###
 	### [  stdout]
-	### ### [pybash-0.0.3]
+	### ### [pybash-0.0.4]
 	### ### [sys.argv] /home/user/.local/bin/pybash -c echo some_cmd; echo some_other_cmd --single-line
 	### ### ---------------
 	### ### [ command]
 	### echo some_cmd; echo some_other_cmd
+	###
 	### ###
 	### ### [  stdout]
 	### ### some_cmd
@@ -56,16 +60,18 @@ Example:
 	### ---------------
 	### [ command]
 	pybash -c "echo some_cmd; echo some_other_cmd"
+	
 	###
 	### [  stdout]
-	### ### [pybash-0.0.3]
+	### ### [pybash-0.0.4]
 	### ### [sys.argv] /home/user/.local/bin/pybash -c echo some_cmd; echo some_other_cmd
 	### ### ---------------
 	### ### [ command]
 	### echo\
 	###   some_cmd;\
 	###   echo\
-	###   some_other_cmd###
+	###   some_other_cmd
+	### ###
 	### ### [  stdout]
 	### ### some_cmd
 	### ### some_other_cmd
@@ -90,8 +96,6 @@ def date_formatIso(obj=None):
 	local_tz = tzlocal.get_localzone() 
 	s  = obj.replace(microsecond=0,tzinfo=local_tz).isoformat()
 	return s
-
-
 
 
 class Unbuffered(object):
@@ -243,7 +247,7 @@ def _main_proc(fd, writer, writing, bash_args, extra_args):
 			_writer('\n')
 			_writer(  '### %s\n'%('-'*15)) 
 		else:
-			_writer('### \n')
+			_writer('\n### \n')
 		# kb = ('[%8s]'%k)
 		_writer('### [%8s]'%(k,))
 		if timestamp:

@@ -5,41 +5,44 @@ from pprint import pprint
 import os,sys
 import subprocess
 
-from pybash import _main
+from pybash import _main,version
 class Case(unittest2.TestCase):
 	def test_c(self):
 		buf = []
-		_main(['pybash','-c','"echo aaa;echo bbb"'], None, writer=buf.append)
+		_main(['pybash.src.py','-c','"echo aaa;echo bbb"'], None, writer=buf.append)
 		buf = ''.join(buf).splitlines()	
 		assert buf == \
-['',
-'###---------------',
-'###-- command',
-'echo\\',
-'  aaa;echo\\',
-'  bbb',
-'',
-'###---------------',
-'###-- stdout',
-'### aaa',
-'### bbb'],pprint(buf)
+['### [pybash-%s]'%version,
+ '### [sys.argv] test.py',
+ '### ---------------',
+ '### [ command]',
+ 'echo\\',
+ '  aaa;echo\\',
+ '  bbb',
+ '### ',
+ '### [  stdout]',
+ '### aaa',
+ '### bbb',
+ '### ---------------'],pprint(buf)
 
 		pprint(buf)
 	def test_pipe(self):
 		# buf = []
-		buf = subprocess.check_output(' '.join(['echo "echo aaa;echo bbb"|',sys.executable,'-m','pybash']),shell=1)
+		buf = subprocess.check_output(' '.join(['echo "echo aaa;echo bbb"|',sys.executable,'pybash.src.py']),shell=1)
 		buf = buf.decode().splitlines()
-		assert buf == ['',
- '###---------------',
- '###-- command',
+		assert buf[1:] == [
+		'### [pybash-]',
+ '### [sys.argv] pybash.src.py',
+ '### ---------------',
+ '### [ command]',
  'echo\\',
  '  aaa;echo\\',
  '  bbb',
- '',
- '###---------------',
- '###-- stdout',
+ '### ',
+ '### [  stdout]',
  '### aaa',
- '### bbb'],pprint(buf)
+ '### bbb',
+ '### ---------------'][1:],pprint(buf)
 
 import pdb
 import traceback

@@ -40,8 +40,6 @@ def date_formatIso(obj=None):
 	return s
 
 
-
-
 class Unbuffered(object):
 	'''S ource:https://stackoverflow.com/a/107717/8083313
 	'''
@@ -191,7 +189,7 @@ def _main_proc(fd, writer, writing, bash_args, extra_args):
 			_writer('\n')
 			_writer(  '### %s\n'%('-'*15)) 
 		else:
-			_writer('### \n')
+			_writer('\n### \n')
 		# kb = ('[%8s]'%k)
 		_writer('### [%8s]'%(k,))
 		if timestamp:

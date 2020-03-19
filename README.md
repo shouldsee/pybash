@@ -43,6 +43,7 @@ Example:
 	### ---------------
 	### [ command]
 	{ echo echo some_cmd; echo echo some_other_cmd; } | tee some_script.sh
+	
 	###
 	### [  stdout]
 	### echo some_cmd
@@ -52,6 +53,7 @@ Example:
 	### ---------------
 	### [ command]
 	pybash < some_script.sh > some_script.sh.log
+	
 	###
 	### [  stdout]
 	### ---------------
@@ -59,13 +61,15 @@ Example:
 	### ---------------
 	### [ command]
 	pybash -c "echo some_cmd; echo some_other_cmd" --single-line
+	
 	###
 	### [  stdout]
-	### ### [pybash-0.0.3]
+	### ### [pybash-0.0.4]
 	### ### [sys.argv] /home/user/.local/bin/pybash -c echo some_cmd; echo some_other_cmd --single-line
 	### ### ---------------
 	### ### [ command]
 	### echo some_cmd; echo some_other_cmd
+	###
 	### ###
 	### ### [  stdout]
 	### ### some_cmd
@@ -76,13 +80,15 @@ Example:
 	### ---------------
 	### [ command]
 	pybash -c "echo some_cmd; echo some_other_cmd"
+	
 	###
 	### [  stdout]
-	### ### [pybash-0.0.3]
+	### ### [pybash-0.0.4]
 	### ### [sys.argv] /home/user/.local/bin/pybash -c echo some_cmd; echo some_other_cmd
 	### ### ---------------
 	### ### [ command]
-	### echo	###   some_cmd;	###   echo	###   some_other_cmd###
+	### echo	###   some_cmd;	###   echo	###   some_other_cmd
+	### ###
 	### ### [  stdout]
 	### ### some_cmd
 	### ### some_other_cmd
