@@ -1,3 +1,4 @@
+some_script.*
 # local test env
 _env/
 *.outward_edges
